@@ -76,7 +76,7 @@ docs/                        # ARCHITECTURE.md, LICENSING.md, transits-spec.md
 ```bash
 npm run dev              # Dev server
 npm run typecheck        # tsc --noEmit
-npm run lint             # eslint . (CI enforces --max-warnings=0)
+npm run lint             # eslint . (keep at zero warnings)
 npm run test             # Vitest (run once); test:watch for watch mode
 npm run ephe:download    # Re-download Swiss Ephemeris files
 EPHE_RANGE=full npm run ephe:download   # Extended historical range
@@ -85,13 +85,12 @@ EPHE_RANGE=full npm run ephe:download   # Extended historical range
 ## Branching & CI
 
 - Work branches → PR into **dev** → dev merges into **main** via PR
-- GitHub Actions (`.github/workflows/ci.yml`) runs on push/PR to main and dev:
-  typecheck, lint (zero warnings), full test suite; ephemeris files cached
-- CI is the merge gate — verify green with `gh run list` after pushing
+- CI is off (GitHub Actions unpaid org-wide; `.github/workflows/ci.yml` won't run).
+  Default = typecheck/lint what you touched; full `npm test` (~450 tests) before
+  a release to main.
 
 ## Testing
 
-- 24 test files under `tests/`, all passing (~450 tests)
 - Accuracy anchored to external references: Astrodienst (Diana, Jobs), Nelson
   Mandela (Southern-Hemisphere fixture), independent Meeus VSOP Sun positions,
   genekeys.com, Robert Lee Camp's published Destiny Card spreads
